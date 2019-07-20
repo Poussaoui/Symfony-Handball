@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matche index{% endblock %}
+
+{% block body %}
+    <h1></h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Semaine</th>
+                <th>Lieu</th>
+                <th>Equipe locale</th>
+                <th>Equipe adverse</th>
+                <th>Date & Heure</th>
+                <th>Num journee</th>
+                <th>Gymnase</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matche in matches %}
+            <tr>
+                <td>{{ matche.numSemaine }}</td>
+                <td>{{ matche.domicileExterieur ? 'Domicile' : 'Exterieur' }}</td>
+                <td>{{ matche.equipeAdverse }}</td>
+                <td>{{ matche.getEquipeLocale() }}</td>
+                <td>{{ matche.dateHeure ? matche.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ matche.numJournee }}</td>
+                <td>{{ matche.gymnase }}</td>
+                <td>
+                    <a href="{{ path('matche_show', {'id': matche.id}) }}">Détails</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('matche_edit', {'id': matche.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('matche_new') }}">Ajouter un matche</a>
+    {% endif %}
+{% endblock %}

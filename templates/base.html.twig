@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bienvenue !{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/ballon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/fontawesome-all.min.css')}}" />
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
+    {% endblock %}
+</head>
+<body class="container">
+    {% block header %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p style="text-align: right; font-style: italic">{{ app.user.displayName }}
+    <a href="/logout">
+      <span style="color: red"><i class="fas fa-sign-out-alt fa-1x"></i></span>
+    </a>
+    </p>
+    {% else %}
+    <p style="text-align: right; font-style: italic">Vous n'êtes pas connecté
+    <a href="/logout">
+      <span style="color: green"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+    </a>
+    </p>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <img src="{{asset('img/banniere-ggahb.png')}}" alt="Bannière GGAHB" height="150"/>
+        </div>
+    </div>
+    {% endblock %}
+    {% block menu %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ path('accueil') }}">Accueil</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/equipe">Equipes <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/matche">Matches</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    {% endblock %}
+    {% block body %}{% endblock %}
+    <script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>

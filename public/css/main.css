@@ -1,0 +1,7 @@
+/* Feuille de style incluse par base.html.twig, à adapter selon vos besoins  */
+
+body {
+	color: black; background: white; 
+	font-family: Trebuchet MS, Cantarell, sans-serif;
+}
+

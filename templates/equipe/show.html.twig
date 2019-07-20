@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipe {{ equipe.libelle }}{% endblock %}
+
+{% block body %}
+    <h1><img width="400px" src="{{ asset('photos/'~equipe.urlPhoto) }}" alt="{{ equipe.urlPhoto }}"/></h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom équipe</th>
+                <td>{{ equipe.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Entraineur</th>
+                <td>{{ equipe.entraineur }}</td>
+            </tr>
+            <tr>
+                <th>Creneaux</th>
+                <td>{{ equipe.creneaux }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ equipe.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="{{ path('show_weeks_equipe', {'id': equipe.id}) }}">Lien vers calendrier</a>
+    <br>
+    <a href="{{ path('equipe_index') }}">Retour à la liste des équipes</a>
+    <br>
+    <a href="{{ path('equipe_edit', {'id': equipe.id}) }}">Modifier informations</a>
+
+    {% if is_granted('ROLE_ADMIN') %}
+    {{ include('equipe/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

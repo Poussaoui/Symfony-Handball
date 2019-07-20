@@ -1,0 +1,50 @@
+<div>
+    <h1></h1>
+
+    <table class="table table-striped">
+        <thead>
+            {% if hide_options == false %}
+                <tr>
+                    <th colspan="6"><a href="{{ path('matche_show_next_previous_week', {'type': 'previous'}) }}">Voir les 3 semaines précédentes</a></th>
+                    <th colspan="6"><a href="{{ path('matche_show_next_previous_week', {'type': 'next'}) }}">Voir les 6 semaines suivantes</a></th>
+                </tr>
+            {% endif %}
+            <tr>
+                <th scope="col">Semaine</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Equipe locale</th>
+                <th scope="col">Equipe adverse</th>
+                <th scope="col">Date & Heure</th>
+                <th scope="col">Num journee</th>
+                <th scope="col">Gymnase</th>
+                <th scope="col">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matche in matches %}
+            <tr>
+                <th scope="row">{{ matche.numSemaine }}</th>
+                <td>{{ matche.domicileExterieur ? 'Domicile' : 'Exterieur' }}</td>
+                <td>{{ matche.equipeAdverse }}</td>
+                <td>{{ matche.getEquipeLocale() }}</td>
+                <td>{{ matche.dateHeure ? matche.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ matche.numJournee }}</td>
+                <td>{{ matche.gymnase }}</td>
+                <td>
+                    <a href="{{ path('matche_show', {'id': matche.id}) }}">Détails</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('matche_edit', {'id': matche.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('matche_new') }}">Ajouter un matche</a>
+    {% endif %}
+</div>

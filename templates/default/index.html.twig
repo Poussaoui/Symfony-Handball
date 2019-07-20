@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <h1>
+            <img src="{{asset('img/ballon.jpg')}}" alt="Ballon" width="40"/>
+            Équipe de France féminine championne d'Europe 2019 !
+            <img src="{{asset('img/ballon.jpg')}}" alt="Ballon" width="40"/>
+        </h1>
+    </div>
+    {{ include('matche/show_week.html.twig') }}
+</div>
+{% endblock %}

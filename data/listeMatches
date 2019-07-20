@@ -1,0 +1,26 @@
+#!/bin/bash
+# Affichage de la liste des matches d'une équipe donnée (pour vérification de la base)
+
+if test -z "$1"
+then
+    echo -e "Usage :\n\t listeMatches libellé_équipe"
+    echo -e "Exemples :"
+    echo -e "\tlisteMatches Loisirs"
+	echo -e "\tlisteMatches \"Moins de 13 A\""
+	echo -e "\tlisteMatches \"Moins de 15 A\""
+	echo -e "\tlisteMatches \"Moins de 15 B\""
+	echo -e "\tlisteMatches \"Moins de 18 A\""
+	echo -e "\tlisteMatches \"Seniors prérégionales \"(SF2)\""
+	echo -e "\tlisteMatches \"Seniors prénationales \"(SF1)\""
+	echo -e "\tlisteMatches \"Moins de 18 B\""
+	echo -e "\tlisteMatches \"Moins de 11\""
+	echo -e "\tlisteMatches \"Moins de 13 B\""
+    exit 1
+fi
+
+mysql -t dgenthia << --FIN--
+SELECT domicile_exterieur, equipe_adverse, date_heure FROM Matches join Equipes 
+WHERE Matches.equipe_locale = Equipes.id
+      AND Equipes.libelle = "$1"
+ORDER by date_heure ASC;
+--FIN--

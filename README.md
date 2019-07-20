@@ -1,2 +1,9 @@
-# Symfony Handball
- Symfony de gestion des équipes et des matches d'une association de handball
+# Projet de base pour le mini-projet Symfony Hand #
+
+- Gestion des équipes.
+- Gestion des matches.
+- Affichages des résultats.
+- Recherche.
+- Liste des matches d'une semaine donnée.
+- Liste des matches (3/6 semaines précédentes & suivantes).
+- Gestion des utilisateurs.

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Equipe {{ equipe.libelle }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier Equipe {{ equipe.libelle }}</h1>
+
+    {{ include('equipe/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+    <a href="{{ path('equipe_index') }}">Retour à la liste des équipes</a>
+
+    {{ include('equipe/_delete_form.html.twig') }}
+{% endblock %}

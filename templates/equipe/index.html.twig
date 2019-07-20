@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des équipes{% endblock %}
+
+{% block body %}
+    <h1></h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom équipe</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipe in equipes %}
+            <tr>
+                <td>{{ equipe.libelle }}</td>
+                <td>
+                    <a href="{{ path('equipe_show', {'id': equipe.id}) }}">Détail équipe</a><br>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('equipe_edit', {'id': equipe.id}) }}">Modifier équipe</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune équipe trouver</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('equipe_new') }}">Ajouter une équipe</a>
+    {% endif %}
+{% endblock %}
